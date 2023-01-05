@@ -21,6 +21,8 @@ model Clients {
   password String
 
   Deliveries Deliveries[]
+
+  @@map("clients")
 }
 
 model Deliveries {
