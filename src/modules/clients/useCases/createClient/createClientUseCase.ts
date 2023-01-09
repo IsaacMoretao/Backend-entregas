@@ -8,15 +8,16 @@ interface ICreateClient {
 
 export class CreateClientUseCase {
   async execute({ password, username }: ICreateClient) {
-    const clientExist = await prisma.clients.findFirst({
+    const clientExists = await prisma.clients.findFirst({
       where: {
         username: {
           equals: username,
-        }
-      }
-    })
+          mode: 'insensitive',
+        },
+      },
+    });
 
-    if (clientExist) {
+    if (clientExists) {
       throw new Error('Client already exists');
     }
 
